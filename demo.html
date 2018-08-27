@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>highlight Demo</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./jquery.highlight.js"></script>
+</head>
+<body>
+
+<style>
+table { border-bottom:#ccc solid 1px; border-right:#ccc solid 1px; }
+th, td { border-top:#ccc solid 1px; border-left:#ccc solid 1px; padding:5px 10px; }
+.highlight { background:#ff0; }
+</style>
+
+<table border="0">
+    <thead>
+        <tr>
+            <th>Month</th>
+            <th>Dates</th>
+            <th>Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>January</td>
+            <td>1st</td>
+            <td>1001</td>
+        </tr>
+        <tr>
+            <td>February</td>
+            <td>1st,12th</td>
+            <td>2011</td>
+        </tr>
+        <tr>
+            <td>March</td>
+            <td>3rd,22th</td>
+            <td>3301</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    <button id="r_num">Regex:/[0-9]+/g</button>
+    <button id="s_th">String:th</button>
+    <button id="opts">option:filter(:not(th))</button>
+    <button id="reset">option:clear filter</button>
+    <button id="clear">CLEAR</button>
+</p>
+
+<script>
+$(function(){
+
+    var table = $("table");
+
+    table.highlight();
+
+    $("#r_num").click(function(){
+        table.trigger("search.highlight", /[0-9]+/g);
+    });
+
+    $("#s_th").click(function(){
+        table.trigger("search.highlight", "th");
+    });
+
+    $("#opts").click(function(){
+        table.trigger("clear.highlight"); // Don't rebuild results.
+        table.highlight({filter:":not(th)"});
+    });
+
+    $("#reset").click(function(){
+        table.trigger("clear.highlight"); // Don't rebuild results.
+        table.highlight({filter:""});
+    });
+
+    $("#clear").click(function(){
+        table.trigger("clear.highlight");
+    });
+
+
+
+});
+</script>
+
+
+<body>
+</html>
