@@ -4,8 +4,8 @@
  *
  * MIT license.
  *
- * Version:0.0.1
- * Date:2018-08
+ * Version:0.0.2
+ * Date:2019-04
  */
 
 ;(function ($) {
@@ -53,7 +53,9 @@
             $(this).off("clear.highlight").on("clear.highlight", {options: opts}, function(event, keyword){
                 var opts = event.data.options;
                 $(this).find(opts.tag + "." + opts.classname).each(function() {
-                    this.parentNode.replaceChild(this.firstChild, this).normalize();
+                    var parent = this.parentNode;
+                    parent.replaceChild(this.firstChild, this);
+                    parent.normalize();
                 });
             });
         });
