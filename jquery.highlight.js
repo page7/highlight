@@ -61,7 +61,7 @@
     }
 
     $.fn.highlight.defaults = {
-        tag: "span",
+        tag: "mark",
         classname: "highlight",
         filter: ""
     };
